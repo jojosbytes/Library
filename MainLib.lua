@@ -3958,6 +3958,8 @@ function library:dropdown(properties)
 end
 
 function library:colorpicker(properties)
+	local inset = game:GetService("GuiService"):GetGuiInset()
+
 	local cfg = {
 		name = properties.name or nil,
 		flag = properties.flag or tostring(2 ^ 789),
@@ -4559,6 +4561,8 @@ function library:colorpicker(properties)
 
 	function cfg.update_color()
 		local mouse = uis:GetMouseLocation()
+		local inset = game:GetService("GuiService"):GetGuiInset()
+		mouse = Vector2.new(mouse.X, mouse.Y - inset.Y)
 
 		if dragging_sat then
 			local rel = (mouse - sat_white.AbsolutePosition)
