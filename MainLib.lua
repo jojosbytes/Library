@@ -3961,11 +3961,11 @@ function library:colorpicker(properties)
 	local cfg = {
 		name = properties.name or nil,
 		flag = properties.flag or tostring(2 ^ 789),
-		color = properties.color or properties.default or Color3.new(1, 1, 1), -- Default to white color if not provided
+		color = properties.color or properties.default or Color3.new(1, 1, 1),
 		alpha = properties.alpha or 1,
 		callback = properties.callback or function() end,
 		animation = "normal",
-		saved_color,
+		saved_color = nil,
 		right_holder = self.right_holder or nil,
 		holder = self.holder or nil,
 	}
@@ -4009,7 +4009,7 @@ function library:colorpicker(properties)
 			BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 		})
 
-		local list = library:create("UIListLayout", {
+		library:create("UIListLayout", {
 			Parent = right_components,
 			Name = "",
 			FillDirection = Enum.FillDirection.Horizontal,
@@ -4046,7 +4046,7 @@ function library:colorpicker(properties)
 		Name = "",
 		ImageColor3 = Color3.fromRGB(41, 41, 204),
 		ScaleType = Enum.ScaleType.Slice,
-		ImageTransparency = 0.8999999761581421,
+		ImageTransparency = 0.9,
 		BorderColor3 = Color3.fromRGB(0, 0, 0),
 		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 		Image = "http://www.roblox.com/asset/?id=18245826428",
@@ -4057,7 +4057,6 @@ function library:colorpicker(properties)
 		BorderSizePixel = 0,
 		SliceCenter = Rect.new(Vector2.new(21, 21), Vector2.new(79, 79)),
 	})
-	--
 
 	-- Colorpicker Instances
 	local picker_inline = library:create("Frame", {
@@ -4111,7 +4110,7 @@ function library:colorpicker(properties)
 		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 	})
 
-	local UIGradient = library:create("UIGradient", {
+	library:create("UIGradient", {
 		Parent = sat_white,
 		Name = "",
 		Transparency = NumberSequence.new({
@@ -4129,7 +4128,7 @@ function library:colorpicker(properties)
 		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 	})
 
-	local UIGradient = library:create("UIGradient", {
+	library:create("UIGradient", {
 		Parent = sat_black,
 		Name = "",
 		Rotation = 90,
@@ -4146,7 +4145,7 @@ function library:colorpicker(properties)
 	local sat_black_cursor = library:create("Frame", {
 		Parent = sat_black,
 		Name = "",
-		Position = UDim2.new(0.800000011920929, 0, 0.20000000298023224, 0),
+		Position = UDim2.new(0.8, 0, 0.2, 0),
 		BorderColor3 = Color3.fromRGB(108, 22, 22),
 		Size = UDim2.new(0, 1, 0, 1),
 		BackgroundColor3 = Color3.fromRGB(204, 41, 41),
@@ -4217,16 +4216,16 @@ function library:colorpicker(properties)
 		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 	})
 
-	local UIGradient = library:create("UIGradient", {
+	library:create("UIGradient", {
 		Parent = hue,
 		Name = "",
 		Color = ColorSequence.new({
 			ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),
-			ColorSequenceKeypoint.new(0.16699999570846558, Color3.fromRGB(255, 255, 0)),
-			ColorSequenceKeypoint.new(0.3330000042915344, Color3.fromRGB(0, 255, 0)),
+			ColorSequenceKeypoint.new(0.167, Color3.fromRGB(255, 255, 0)),
+			ColorSequenceKeypoint.new(0.333, Color3.fromRGB(0, 255, 0)),
 			ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 255, 255)),
-			ColorSequenceKeypoint.new(0.6669999957084656, Color3.fromRGB(0, 0, 255)),
-			ColorSequenceKeypoint.new(0.8330000042915344, Color3.fromRGB(255, 0, 255)),
+			ColorSequenceKeypoint.new(0.667, Color3.fromRGB(0, 0, 255)),
+			ColorSequenceKeypoint.new(0.833, Color3.fromRGB(255, 0, 255)),
 			ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0)),
 		}),
 	})
@@ -4298,7 +4297,7 @@ function library:colorpicker(properties)
 		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 	})
 
-	local UIGradient = library:create("UIGradient", {
+	library:create("UIGradient", {
 		Parent = alpha_image,
 		Name = "",
 		Transparency = NumberSequence.new({
@@ -4315,8 +4314,6 @@ function library:colorpicker(properties)
 		Size = UDim2.new(0, 1, 1, 0),
 		BackgroundColor3 = Color3.fromRGB(204, 41, 41),
 	})
-
-	--
 
 	-- Animation Handling
 	local content_inline = library:create("Frame", {
@@ -4352,7 +4349,7 @@ function library:colorpicker(properties)
 		BackgroundColor3 = Color3.fromRGB(50, 50, 50),
 	})
 
-	local UIListLayout = library:create("UIListLayout", {
+	library:create("UIListLayout", {
 		Parent = options,
 		Name = "",
 		Padding = UDim.new(0, 2),
@@ -4375,7 +4372,7 @@ function library:colorpicker(properties)
 		BackgroundColor3 = Color3.fromRGB(65, 65, 65),
 	})
 
-	local UIPadding = library:create("UIPadding", {
+	library:create("UIPadding", {
 		Parent = normal,
 		Name = "",
 		PaddingBottom = UDim.new(0, 1),
@@ -4399,7 +4396,7 @@ function library:colorpicker(properties)
 		BackgroundColor3 = Color3.fromRGB(65, 65, 65),
 	})
 
-	local UIPadding = library:create("UIPadding", {
+	library:create("UIPadding", {
 		Parent = rainbow,
 		Name = "",
 		PaddingBottom = UDim.new(0, 1),
@@ -4423,14 +4420,14 @@ function library:colorpicker(properties)
 		BackgroundColor3 = Color3.fromRGB(65, 65, 65),
 	})
 
-	local UIPadding = library:create("UIPadding", {
+	library:create("UIPadding", {
 		Parent = fade,
 		Name = "",
 		PaddingBottom = UDim.new(0, 1),
 		PaddingLeft = UDim.new(0, 5),
 	})
 
-	local UIPadding = library:create("UIPadding", {
+	library:create("UIPadding", {
 		Parent = options,
 		Name = "",
 		PaddingBottom = UDim.new(0, 4),
@@ -4453,14 +4450,14 @@ function library:colorpicker(properties)
 		BackgroundColor3 = Color3.fromRGB(65, 65, 65),
 	})
 
-	local UIPadding = library:create("UIPadding", {
+	library:create("UIPadding", {
 		Parent = fade_alpha,
 		Name = "",
 		PaddingBottom = UDim.new(0, 1),
 		PaddingLeft = UDim.new(0, 5),
 	})
-	--
 
+	-- Visibility
 	function cfg.set_visible(bool)
 		picker_inline.Visible = bool
 		content_inline.Visible = false
@@ -4470,17 +4467,16 @@ function library:colorpicker(properties)
 				library.current_element_open.set_visible(false)
 				library.current_element_open.open = false
 			end
-
 			library.current_element_open = cfg
 		end
 
-		picker_inline.Position = dim2(0, icon_inline.AbsolutePosition.X + 1, 0, icon_inline.AbsolutePosition.Y + 17)
+		local base_pos = icon_inline.AbsolutePosition
+		picker_inline.Position = UDim2.fromOffset(base_pos.X + 1, base_pos.Y + 17)
 		content_inline.Position = dim2(0, icon_inline.AbsolutePosition.X + 20, 0, icon_inline.AbsolutePosition.Y)
 	end
 
 	icon_inline.MouseButton1Click:Connect(function()
 		cfg.open = not cfg.open
-
 		cfg.set_visible(cfg.open)
 	end)
 
@@ -4492,84 +4488,72 @@ function library:colorpicker(properties)
 
 		content_inline.Visible = not content_inline.Visible
 
-		picker_inline.Position = dim2(0, icon_inline.AbsolutePosition.X + 1, 0, icon_inline.AbsolutePosition.Y + 17)
+		local base_pos = icon_inline.AbsolutePosition
+		picker_inline.Position = UDim2.fromOffset(base_pos.X + 1, base_pos.Y + 17)
 		content_inline.Position = dim2(0, icon_inline.AbsolutePosition.X + 20, 0, icon_inline.AbsolutePosition.Y)
 	end)
 
+	-- Core setter
+	local base_h, base_s, base_v = h, s, v
+
 	function cfg.set(color, alpha)
+		local manual = false
+
 		if color then
 			h, s, v = color:ToHSV()
-		else
-			cfg.saved_color = hsv(s, s, v)
+			cfg.saved_color = color
+			base_h, base_s, base_v = h, s, v
+			manual = true
 		end
 
-		if alpha then
+		if alpha ~= nil then
 			a = alpha
 		end
 
-		local visual = alpha_inline:FindFirstChildOfClass("Frame")
-
-		if not visual then
-			return
-		end
-
-		local hsv_position = Color3.fromHSV(h, s, v)
 		local Color = Color3.fromHSV(h, s, v)
 
-		local value = h
-		local offset = (value < 1) and 0 or -4
-		hue_cursor.Position = dim2(value, offset, 0, 0)
+		-- Hue cursor
+		hue_cursor.Position = UDim2.new(h, -1, 0, 0)
 
-		local offset = (a < 1) and 0 or -4
-		alpha_cursor.Position = dim2(a, offset, 0, 0)
+		-- Alpha cursor
+		alpha_cursor.Position = UDim2.new(a, -1, 0, 0)
 
-		visual.BackgroundColor3 = Color
+		-- Saturation/Value cursor
+		sat_black_cursor.Position = UDim2.new(s, -0.5, 1 - v, -0.5)
+
+		-- Update visuals
+		icon_inline.BackgroundColor3 = Color3.fromRGB(Color.R * 255 * 0.25, Color.G * 255 * 0.25, Color.B * 255 * 0.25)
+		icon.BackgroundColor3 = Color
 		glow.ImageColor3 = Color
 
-		local RGB_Format = visual.BackgroundColor3
-
-		icon_inline.BackgroundColor3 = Color3.fromRGB(RGB_Format.R / 4, RGB_Format.G / 4, RGB_Format.B / 4)
-		icon.BorderColor3 = Color3.fromRGB(
-			math.floor((Color.R * 255) + 0.5) / 2,
-			math.floor((Color.G * 255) + 0.5) / 2,
-			math.floor((Color.B * 255) + 0.5) / 2
-		)
-		icon.BackgroundColor3 = Color
-
-		__input.Text = math.floor(RGB_Format.R * 255)
-			.. ", "
-			.. math.floor(RGB_Format.G * 255)
-			.. ", "
-			.. math.floor(RGB_Format.B * 255)
-			.. ", "
-			.. library:round(a, 0.01)
 		preview.BackgroundColor3 = Color
 		preview_image.ImageTransparency = 1 - a
 
 		sat.BackgroundColor3 = Color3.fromHSV(h, 1, 1)
 
-		local s_offset = (s < 1) and 0 or -3
-		local v_offset = (1 - v < 1) and 0 or -3
-		sat_black_cursor.Position = dim2(s, s_offset, 1 - v, v_offset)
+		__input.Text = string.format("%d, %d, %d, %.2f",
+			Color.R * 255,
+			Color.G * 255,
+			Color.B * 255,
+			a
+		)
 
 		cfg.color = Color
 		cfg.alpha = a
 
-		flags[cfg.flag] = {
-			Color = Color,
-			Transparency = a,
-		}
-		cfg.saved_color = hsv(s, s, v)
+		flags[cfg.flag] = { Color = Color, Transparency = a }
 
-		cfg.callback(Color, a)
+		if manual then
+			cfg.callback(Color, a)
+		end
 	end
 
 	__input.FocusLost:Connect(function()
 		local text = __input.Text
-		local r, g, b, a = library:convert_string_rgb(text)
+		local r, g, b, alpha = library:convert_string_rgb(text)
 
-		if r and g and b and a then
-			cfg.set(rgb(r, g, b), a)
+		if r and g and b and alpha then
+			cfg.set(rgb(r, g, b), alpha)
 		end
 	end)
 
@@ -4577,32 +4561,19 @@ function library:colorpicker(properties)
 		local mouse = uis:GetMouseLocation()
 
 		if dragging_sat then
-			s = math.clamp(
-				(vec2(mouse.X, mouse.Y - gui_offset) - sat_white.AbsolutePosition).X / sat_white.AbsoluteSize.X,
-				0,
-				1
-			)
-			v = 1
-			- math.clamp(
-				(vec2(mouse.X, mouse.Y - gui_offset) - sat_black.AbsolutePosition).Y / sat_black.AbsoluteSize.Y,
-				0,
-				1
-			)
-		elseif dragging_hue then
-			h = 1
-			- math.clamp(
-				1
-				- (vec2(mouse.X, mouse.Y - gui_offset) - hue_inline.AbsolutePosition).X
-					/ hue_inline.AbsoluteSize.X,
-				0,
-				1
-			)
-		elseif dragging_alpha then
-			a = math.clamp(
-				(vec2(mouse.X, mouse.Y - gui_offset) - alpha_inline.AbsolutePosition).X / alpha_inline.AbsoluteSize.X,
-				0,
-				1
-			)
+			local rel = (mouse - sat_white.AbsolutePosition)
+			s = math.clamp(rel.X / sat_white.AbsoluteSize.X, 0, 1)
+			v = 1 - math.clamp(rel.Y / sat_white.AbsoluteSize.Y, 0, 1)
+		end
+
+		if dragging_hue then
+			local rel = mouse.X - hue.AbsolutePosition.X
+			h = math.clamp(rel / hue.AbsoluteSize.X, 0, 1)
+		end
+
+		if dragging_alpha then
+			local rel = mouse.X - alpha.AbsolutePosition.X
+			a = math.clamp(rel / alpha.AbsoluteSize.X, 0, 1)
 		end
 
 		cfg.set(nil, nil)
@@ -4620,44 +4591,39 @@ function library:colorpicker(properties)
 		dragging_sat = true
 	end)
 
-	cfg.saved_color = hsv(h, s, v)
-	local selected = normal
+	cfg.saved_color = Color3.fromHSV(h, s, v)
+
+	local selectedButton = normal
+	local selectedMode = "normal"
 	flags[cfg.flag]["animation"] = "normal"
 
-	rainbow.MouseButton1Down:Connect(function()
-		selected.BackgroundTransparency = 1
-		selected = "rainbow"
-		rainbow.BackgroundTransparency = 0
+	local function selectMode(button, mode)
+		if selectedButton then
+			selectedButton.BackgroundTransparency = 1
+		end
+		selectedButton = button
+		selectedMode = mode
+		if button then
+			button.BackgroundTransparency = 0
+		end
+		flags[cfg.flag]["animation"] = mode
+	end
 
-		flags[cfg.flag]["animation"] = "rainbow"
-		cfg.saved_color = hsv(s, s, v)
+	rainbow.MouseButton1Down:Connect(function()
+		selectMode(rainbow, "rainbow")
 	end)
 
 	fade_alpha.MouseButton1Down:Connect(function()
-		selected.BackgroundTransparency = 1
-		selected = "fade_alpha"
-		fade_alpha.BackgroundTransparency = 0
-
-		flags[cfg.flag]["animation"] = "fade_alpha"
-		cfg.saved_color = hsv(s, s, v)
+		selectMode(fade_alpha, "fade_alpha")
 	end)
 
 	fade.MouseButton1Down:Connect(function()
-		selected.BackgroundTransparency = 1
-		selected = "fade"
-		fade.BackgroundTransparency = 0
-
-		flags[cfg.flag]["animation"] = "fade"
-		cfg.saved_color = hsv(s, s, v)
+		selectMode(fade, "fade")
 	end)
 
 	normal.MouseButton1Down:Connect(function()
-		selected.BackgroundTransparency = 1
-		selected = "normal"
-		normal.BackgroundTransparency = 0
-
-		flags[cfg.flag]["animation"] = "normal"
-		cfg.set(cfg.saved_color)
+		selectMode(normal, "normal")
+		cfg.set(cfg.saved_color or Color3.fromHSV(base_h, base_s, base_v), a)
 	end)
 
 	uis.InputEnded:Connect(function(input)
@@ -4669,31 +4635,27 @@ function library:colorpicker(properties)
 	end)
 
 	uis.InputChanged:Connect(function(input)
-		if
-			(dragging_sat or dragging_hue or dragging_alpha)
-			and input.UserInputType == Enum.UserInputType.MouseMovement
-		then
+		if (dragging_sat or dragging_hue or dragging_alpha)
+			and input.UserInputType == Enum.UserInputType.MouseMovement then
 			cfg.update_color()
 		end
 	end)
 
 	cfg.set(cfg.color, cfg.alpha)
 
-	self.previous_holder = parent
-
 	library.config_flags[cfg.flag] = cfg.set
 
 	task.spawn(function()
 		while true do
-			if selected ~= "normal" then
-				cfg.set(
-					hsv(
-						selected == "rainbow" and library.sin or h,
-						selected == "rainbow" and 1 or s,
-						selected == "fade" and library.sin or v
-					),
-					selected == "fade_alpha" and library.sin
-				)
+			if selectedMode == "rainbow" then
+				local t = (tick() % 5) / 5
+				cfg.set(Color3.fromHSV(t, 1, 1), a)
+			elseif selectedMode == "fade" then
+				local vOsc = (math.sin(tick()) + 1) / 2
+				cfg.set(Color3.fromHSV(base_h, base_s, vOsc), a)
+			elseif selectedMode == "fade_alpha" then
+				local aOsc = (math.sin(tick()) + 1) / 2
+				cfg.set(cfg.color, aOsc)
 			end
 			task.wait()
 		end
