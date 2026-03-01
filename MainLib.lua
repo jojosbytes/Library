@@ -4545,9 +4545,9 @@ function library:colorpicker(properties)
 
 		flags[cfg.flag] = { Color = Color, Transparency = a }
 
-		if manual then
-			cfg.callback(Color, a)
-		end
+
+		cfg.callback(Color, a)
+
 	end
 
 	__input.FocusLost:Connect(function()
