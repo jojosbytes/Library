@@ -3610,7 +3610,6 @@ function library:slider(properties)
 
 	return setmetatable(cfg, library)
 end
-
 function library:dropdown(properties)
 	local cfg = {
 		name = properties.name or nil,
@@ -3627,6 +3626,18 @@ function library:dropdown(properties)
 		previous_holder = self,
 	}
 	cfg.default = properties.default or (cfg.multi and { cfg.items[1] }) or cfg.items[1] or nil
+
+	local function getDropdownHeight(itemCount)
+		local itemHeight = 16
+		local maxVisibleItems = 5
+		local maxHeight = itemHeight * maxVisibleItems
+
+		if itemCount <= maxVisibleItems then
+			return itemHeight * itemCount
+		else
+			return maxHeight
+		end
+	end
 
 	local bottom_components
 	local object
@@ -3750,7 +3761,7 @@ function library:dropdown(properties)
 	end)
 
 	dropdown_inline:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-		content_inline.Size = UDim2.new(0, dropdown_inline.AbsoluteSize.X, 0, 0)
+		content_inline.Size = UDim2.new(0, dropdown_inline.AbsoluteSize.X, 0, optionsHeight + 4)
 	end)
 
 	local content = library:create("Frame", {
@@ -3762,6 +3773,8 @@ function library:dropdown(properties)
 		BackgroundColor3 = Color3.fromRGB(38, 38, 38),
 	})
 
+	local optionsHeight = getDropdownHeight(#cfg.items)
+
 	local options = library:create("ScrollingFrame", {
 		Parent = content,
 		Name = "",
@@ -3772,9 +3785,10 @@ function library:dropdown(properties)
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Position = UDim2.new(0, 2, 0, 2),
-		Size = UDim2.new(1, -4, 0, 150), -- FIXED HEIGHT (adjust as needed)
-		CanvasSize = UDim2.new(0, 0, 0, 0), -- auto-updated below
+		Size = UDim2.new(1, -4, 0, optionsHeight),
+		CanvasSize = UDim2.new(0, 0, 0, 0),
 	})
+
 
 	local UIListLayout = library:create("UIListLayout", {
 		Parent = options,
@@ -3856,12 +3870,14 @@ function library:dropdown(properties)
 	end
 
 	function cfg:refresh_options(refreshed_list)
+		-- Clear old items
 		for _, v in next, cfg.option_instances do
 			v:Destroy()
 		end
 
 		cfg.option_instances = {}
 
+		-- Rebuild items
 		for i, v in next, refreshed_list do
 			local op3 = library:create("TextButton", {
 				Parent = options,
@@ -3880,9 +3896,8 @@ function library:dropdown(properties)
 				BackgroundColor3 = Color3.fromRGB(65, 65, 65),
 			})
 
-			local UIPadding = library:create("UIPadding", {
+			library:create("UIPadding", {
 				Parent = op3,
-				Name = "",
 				PaddingLeft = UDim.new(0, 5),
 			})
 
@@ -3902,11 +3917,27 @@ function library:dropdown(properties)
 				else
 					cfg.set_visible(false)
 					cfg.open = false
-
 					cfg.set(op3.Text)
 				end
 			end)
 		end
+
+		-- Dynamic height logic
+		local itemCount = #refreshed_list
+		local itemHeight = 16 -- 14px + padding
+		local maxVisibleItems = 5
+		local maxHeight = itemHeight * maxVisibleItems
+
+		local newHeight
+		if itemCount <= maxVisibleItems then
+			newHeight = itemHeight * itemCount
+		else
+			newHeight = maxHeight
+		end
+
+		-- Apply new sizes
+		options.Size = UDim2.new(1, -4, 0, newHeight)
+		content_inline.Size = UDim2.new(0, dropdown_inline.AbsoluteSize.X, 0, newHeight + 4)
 
 		dropdown.Text = ""
 	end
