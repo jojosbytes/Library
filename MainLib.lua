@@ -39,8 +39,6 @@ if getgenv().library then
 	getgenv().library:unload()
 end
 
-local library = getgenv().library
-
 -- library init
 getgenv().library = {
 	flags = {},
