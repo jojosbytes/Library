@@ -429,27 +429,28 @@ function library:window(properties)
 		size = properties.Size or properties.size or dim2(0, 500, 0, 650),
 	}
 
-	local animated_text = library:animation(cfg.name .. " | private")
+	local animated_text = library:animation(cfg.name)
 
-	-- watermark
+	local measure = library:create("TextLabel", {
+		Parent = library.gui,
+		FontFace = library.font,
+		TextSize = 12,
+		BackgroundTransparency = 1,
+		Visible = false,
+	})
+
 	local __holder = library:create("Frame", {
 		Parent = library.gui,
-		Name = "",
 		BackgroundTransparency = 1,
 		Position = UDim2.new(0, 20, 0, 20),
-		BorderColor3 = Color3.fromRGB(19, 19, 19),
-		ZIndex = 2,
 		AutomaticSize = Enum.AutomaticSize.X,
-		BackgroundColor3 = Color3.fromRGB(40, 40, 40),
 	})
 
 	local inline1 = library:create("Frame", {
 		Parent = __holder,
-		Name = "",
 		Active = true,
 		Draggable = true,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		Size = UDim2.new(0, ((#animated_text / 2) * 5) + 13, 0, 40),
+		Size = UDim2.new(0, 100, 0, 40),
 		BackgroundColor3 = Color3.fromRGB(40, 40, 40),
 	})
 
