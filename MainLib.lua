@@ -1,15 +1,11 @@
 local uis = game:GetService("UserInputService")
 local players = game:GetService("Players")
 local ws = game:GetService("Workspace")
-local http_service = game:GetService("HttpService")
+local http_service = game.HttpService
 local gui_service = game:GetService("GuiService")
-local lighting = game:GetService("Lighting")
-local run = game:GetService("RunService")
-local stats = game:GetService("Stats")
-local coregui = game:GetService("CoreGui")
-local debris = game:GetService("Debris")
+
+local coregui = game.CoreGui
 local tween_service = game:GetService("TweenService")
-local rs = game:GetService("ReplicatedStorage")
 
 local vec2 = Vector2.new
 local vec3 = Vector3.new
@@ -36,20 +32,20 @@ local min = math.min
 local abs = math.abs
 
 -- library init
-getgenv().library = {
+local library = {
 	flags = {},
 	config_flags = {},
 	connections = {},
 	notifications = {},
 	instances = {},
 	main_frame = {},
-	config_holder,
-	current_tab,
-	current_element_open,
-	dock_button_holder,
-	gui,
+	config_holder = nil,
+	current_tab = nil,
+	current_element_open = nil,
+	dock_button_holder = nil,
+	gui = nil,
 	sin = 0,
-	keybind_path,
+	keybind_path  = nil,
 	panel_open = false,
 
 	directory = "inactivity",
@@ -57,10 +53,9 @@ getgenv().library = {
 		"/fonts",
 		"/configs",
 	},
-	font,
+	font = nil,
 }
 
-local library = getgenv().library
 local flags = library.flags
 local config_flags = library.config_flags
 
