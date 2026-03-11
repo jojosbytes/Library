@@ -1,7 +1,7 @@
 local uis = game:GetService("UserInputService")
 local players = game:GetService("Players")
 local ws = game:GetService("Workspace")
-local http_service = game.HttpService
+local http_service = game:GetService("HttpService")
 local gui_service = game:GetService("GuiService")
 
 local coregui = game.CoreGui
